@@ -82,6 +82,10 @@ class ConfigServerProvider extends ServiceProvider
         $endOfLinePosition = strpos($str, "\n", $keyPosition);
         $oldLine = substr($str, $keyPosition, $endOfLinePosition - $keyPosition);
 
+        if (str_contains(' ', $envValue)) {
+          $envValue = "\"$envValue\"";
+        }
+
         // If key does not exist, add it
         if (!$keyPosition || !$endOfLinePosition || !$oldLine) {
           $str .= "{$envKey}={$envValue}\n";
