@@ -28,7 +28,7 @@ class ConfigServerProvider extends ServiceProvider
     $this->registerCommands();
 
     if (ConfigClient::$runEveryTime) {
-      self::updateEnvConfigs();
+      self::updateEnvConfigs(false);
     }
   }
 
