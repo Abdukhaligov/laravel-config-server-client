@@ -30,6 +30,8 @@ class ConfigServerProvider extends ServiceProvider
     if (ConfigClient::$runEveryTime) {
       self::updateEnvConfigs(false);
     }
+
+    $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
   }
 
 
@@ -40,11 +42,9 @@ class ConfigServerProvider extends ServiceProvider
    */
   protected function registerCommands()
   {
-    if ($this->app->runningInConsole()) {
-      $this->commands([
-        Console\UpdateCommand::class,
-      ]);
-    }
+    $this->commands([
+      Console\UpdateCommand::class,
+    ]);
   }
 
   /**
