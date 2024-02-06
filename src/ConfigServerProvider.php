@@ -86,7 +86,7 @@ class ConfigServerProvider extends ServiceProvider
         if (!$keyPosition || !$endOfLinePosition || !$oldLine) {
           $str .= "{$envKey}={$envValue}\n";
           ConfigClient::$newConfigCount++;
-        } else if (($newLine = "{$envKey}={$envValue}") && $oldLine != $newLine) {
+        } else if (ConfigClient::$overwrite && ($newLine = "{$envKey}={$envValue}") && $oldLine != $newLine) {
           $str = str_replace($oldLine, $newLine, $str);
           ConfigClient::$updatedConfigCount++;
         }

@@ -7,7 +7,11 @@ use Illuminate\Console\Command;
 
 class UpdateCommand extends Command
 {
-  protected $signature = 'config-client:update {--dry-run : Simulate the update process without making any changes}';
+  protected $signature = 'config-client:update
+                            {--dry-run : Simulate the update process without making any changes}
+                            {--custom-env-file= : Specify a custom .env file for the update}
+                            {--overwrite : Overwrite existing .env configurations with new values}';
+
   protected $description = 'Update all .env values from the config server. Use --dry-run to simulate the update process.';
 
   /**
@@ -17,6 +21,14 @@ class UpdateCommand extends Command
    */
   public function handle()
   {
+    if ($customEnvFile = $this->option('custom-env-file')) {
+      ConfigClient::$customEnvFile = $customEnvFile;
+    }
+
+    if ($this->option('overwrite')) {
+      ConfigClient::$overwrite = true;
+    }
+
     if ($this->option('dry-run')) {
       $this->info('Simulating update process...');
       ConfigClient::update(true);
