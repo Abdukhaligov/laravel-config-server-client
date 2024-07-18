@@ -3,7 +3,7 @@
 use Abdukhaligov\LaravelConfigServerClient\ConfigClient;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/config-clinet')->group(function () {
+Route::prefix('/config-client')->group(function () {
     Route::get('/update', function () {
         $dryRun = request()->query('dry-run', false) === 'true'; // Ensure boolean conversion
         $overwrite = request()->query('overwrite', false) === 'true'; // Ensure boolean conversion
